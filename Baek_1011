@@ -1,0 +1,48 @@
+#include <iostream>
+
+using namespace std;
+
+long long result(long long n){
+    long long cnt = 0;
+    long long num = 2; //계수
+    long long i = 2;
+
+    if(n == 1 || n == 2){
+        return n;
+    }
+    while(1){
+        if(cnt == 2){
+            num++;
+            cnt = 0;
+        }
+
+        i += num;
+        cnt++;
+        if(i >= n){
+            break;
+        }
+    }
+
+    if(cnt % 2 == 1){
+        return num * 2 - 1;
+    }
+    else{
+        return num * 2;
+    }
+}
+
+
+int main() {
+    int t;
+    long long x, y;
+
+    cin >> t;
+
+    for(int i = 0; i < t; i++){
+        cin >> x >> y ;
+
+        cout << result(y - x) << endl;
+    }
+
+    return 0;
+}
