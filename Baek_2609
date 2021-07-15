@@ -1,0 +1,45 @@
+#include <iostream>
+
+using namespace std;
+
+void swap(int& a, int& b){
+    int temp = 0;
+
+    temp = a;
+    a = b;
+    b = temp;
+}
+
+int getGcd(int a, int b){
+    int c = 0;
+
+    while(1){
+        c = a % b;
+        a = b;
+        b = c;
+
+        if(b == 0)
+            break;
+    }
+
+    return a;
+}
+
+int main() {
+    int a, b;
+    int gcd, lcm = 0;
+
+    cin >> a >> b;
+
+    if(b > a)
+        swap(a,b);
+
+    gcd = getGcd(a, b);
+    lcm = (a*b) / gcd;
+
+    cout << gcd << endl;
+    cout << lcm;
+
+
+    return 0;
+}
