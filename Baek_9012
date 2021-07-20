@@ -1,0 +1,54 @@
+#include <iostream>
+#include <cmath>
+#include <stack>
+#include <string>
+
+
+using namespace std;
+
+int main() {
+    stack<char> st;
+
+    int t;
+    bool result;
+
+    cin >> t;
+
+    for(int i = 0; i < t; i++){
+        string str;
+        result = true;
+
+        while(!st.empty()){
+            st.pop();
+        }
+
+        cin >> str;
+
+        for(int j = 0; j < str.length(); j++){
+            if(str[j] == '(') {
+                st.push('(');
+            }
+
+            else if(str[j] == ')'){
+                if(st.empty()){
+                    result = false;
+                    break;
+                }
+                else{
+                    st.pop();
+                }
+            }
+        }
+
+        if(result){
+            if(st.empty())
+                cout << "YES" << endl;
+            else
+                cout << "NO" << endl;
+        }
+        else
+            cout << "NO" << endl;
+    }
+
+    return 0;
+}
