@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#define _CRT_NO_SECURE_WARNINGS
+#define true 1
+#define false 0
+#define MAX_STACK_SIZE 100000
+
+int stack[MAX_STACK_SIZE];
+int top = -1;
+
+int IsEmpty() {
+	return top < 0;
+}
+
+int IsFull() {
+    if (top >= MAX_STACK_SIZE - 1)
+        return true;
+    else
+        return false;
+}
+
+void push(int value) {
+    if (IsFull() == true)
+        printf("스택이 가득 찼습니다.");
+    else
+        stack[++top] = value;
+}
+
+int pop() {
+    if (IsEmpty() == true)
+        printf("스택이 비었습니다.");
+    else
+        return stack[top--];
+}
+
+int main(void) {
+    int n = 0, k = 0;
+    int num = 1; //stack에 추가될 숫자 1부터
+    char result[1000000] = { 0, };
+    int p = true;
+
+  
+    scanf("%d", &n);
+    //수열 생성, 초기화
+    int *array = (int*)calloc(n, sizeof(int));
+
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &array[i]);
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (array[i] == 1 || array[i] >= num) {
+            for (int j = num; j <= array[i]; j++) {
+                push(num);
+                result[k] = '+';
+                k++;
+                num++;
+            }
+            pop();
+            result[k] = '-';
+            k++;
+        }
+        else if (array[i] < num) {
+            if (array[i] != stack[top]) {
+                printf("NO\n");
+                p = false;
+                break;
+            }
+            else {
+                pop();
+                result[k] = '-';
+                k++;
+            }
+        }
+        else{
+            pop();
+            result[k] = '-';
+            k++;
+        }
+    }
+    if (p == true){
+        k = 0;
+        while (result[k] != 0) {
+            printf("%c\n", result[k]);
+            k++;
+        }
+    }
+
+    free(array);
+	return 0;
+}
