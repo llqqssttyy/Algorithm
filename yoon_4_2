@@ -1,0 +1,64 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+class Point {
+private:
+	int xpos;
+	int ypos;
+
+public:
+	void Init(int x, int y) {
+		xpos = x;
+		ypos = y;
+	}
+	void ShowPointInfo() const{
+		cout << "[" << xpos << ", " << ypos << "]" << endl;
+	}
+};
+
+class Circle { //(수정)point 클래스를 따로 만들어서 중심점은 point 객체 생성으로 표현하기
+private:
+	int radius;
+	Point center;
+
+public:
+	void Init(int x, int y, int r) {
+		center.Init(x, y);
+		radius = r;
+	}
+	void ShowCircleInfo() const { //const는 이 함수 내에서는 멤버변수에 저장된 값을 변경하지 않겠다는 선언.
+		cout << "radius: " << radius << endl;
+		center.ShowPointInfo();
+	}
+};
+
+class Ring {
+private:
+	Circle circle1;
+	Circle circle2;
+
+public:
+	void Init(int xpos1, int ypos1, int r1, int xpos2, int ypos2, int r2) {
+		circle1.Init(xpos1, ypos1, r1);
+		circle2.Init(xpos2, ypos2, r2);
+	}
+
+	void ShowRingInfo() const {
+		cout << "Inner Circle Info. . ." << endl;
+		circle1.ShowCircleInfo();
+
+		cout << "Outter Circle Info. . ." << endl;
+		circle2.ShowCircleInfo();
+	}
+};
+
+int main(void) {
+	Ring ring;
+
+	ring.Init(1, 1, 4, 2, 2, 9);
+	ring.ShowRingInfo();
+
+	return 0;
+}
