@@ -35,7 +35,7 @@ public:
 		return num;
 	}
 
-	void ShowSalesResult() {
+	void ShowSalesResult() const {
 		cout << "남은 사과: " << numOfApples << endl;
 		cout << "판매 수익: " << myMoney << endl << endl;
 	}
@@ -67,7 +67,7 @@ public:
 		myMoney -= money;
 	}
 
-	void ShowBuyResult() {
+	void ShowBuyResult() const {
 		cout << "현재 잔액: " << myMoney << endl;
 		cout << "사과 개수: " << numOfApples << endl << endl;
 	}
