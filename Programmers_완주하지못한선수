@@ -1,0 +1,27 @@
+#include <string>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+string solution(vector<string> participant, vector<string> completion) {
+    map<string, int> pList;
+    
+    // initialize list
+    for(int i = 0; i < participant.size(); i++){
+        pair<map<string, int>::iterator, bool> pr;
+        pr = pList.insert(pair<string, int> (participant[i], 1));
+
+        if(pr.second == false)
+            pList[participant[i]]++;
+    }
+    
+    for(int i = 0; i < completion.size(); i++){
+        pList[completion[i]]--;
+        if(pList[completion[i]] == 0)
+            pList.erase(completion[i]);
+    }
+    
+    string answer = pList.begin()->first;
+    return answer;
+}
