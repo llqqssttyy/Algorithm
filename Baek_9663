@@ -1,0 +1,52 @@
+// 백트래킹
+
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+
+using namespace std;
+
+// 이전 체스말의 위치는 col에 저장해가며 비교한다.
+vector<int> col;
+int N = 0;
+int cnt = 0;
+
+// 체스판의 다음 행 자리를 검사하는 함수
+bool check(int level){
+    for(int i = 0; i < level; i++){
+        // 이전 열의 바로 아래이거나 대각선 방향일 경우 체스말이 놓일 수 없음
+        if(col[level] == col[i] || abs(col[level] - col[i]) == level - i)
+            return false;
+    }
+    return true;
+}
+
+// 체스판의 행을 검사하는 함수
+void NQueens(int level){
+    // 트리의 끝까지 갔다면
+    if(level == N){
+        cnt++;
+        return;
+    }
+    else{
+        for(int i = 0; i < N; i++){
+            col[level] = i;
+            if(check(level)){
+                NQueens(level+1);
+            }
+        }
+    }
+    return;
+}
+
+int main(){
+    cin >> N;
+    for(int i = 0; i < N; i++){
+        col.push_back(0);
+    }
+
+    NQueens(0);
+
+    cout << cnt;
+    return 0;
+}
